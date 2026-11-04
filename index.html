@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EDU.KZ сайтын ашу</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f5f9ff; --card: #ffffff; --text: #1d2433; --muted: #5d6b82;
+    --line: #d6e2f5; --accent: #2f8cff; --accent-d: #1f74e0; --err: #d32f2f; --ok: #1b8a4b;
+    --field: #fbfdff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.7rem; margin: 8px 0 4px; color: var(--accent-d); }
+  .lead { color: var(--muted); margin: 0 0 20px; }
+  fieldset { box-shadow: 0 2px 10px rgba(47,140,255,.08); background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 18px 18px 6px; margin: 0 0 18px; }
+  legend { font-weight: 700; font-size: 1.05rem; padding: 0 8px; }
+  .field { margin-bottom: 14px; }
+  label.t { display: block; font-weight: 600; margin-bottom: 5px; }
+  .req { color: var(--err); }
+  .hint { color: var(--muted); font-size: .85rem; margin-top: 3px; }
+  input[type=text], input[type=email], input[type=number], textarea, select {
+    width: 100%; padding: 10px 12px; font: inherit; color: var(--text);
+    background: var(--field); border: 1px solid var(--line); border-radius: 10px; }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); border-color: transparent; }
+  .invalid { border-color: var(--err) !important; }
+  .msg { color: var(--err); font-size: .85rem; margin-top: 3px; min-height: 0; }
+  .radios { display: flex; gap: 18px; flex-wrap: wrap; }
+  .radios label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .soc-line { display: flex; align-items: center; gap: 10px; }
+  .soc-ico { flex: 0 0 38px; width: 38px; height: 38px; display: inline-flex; }
+  .soc-ico svg { width: 100%; height: 100%; }
+  .soc-row { margin-bottom: 10px; }
+  .group-card { border: 1px dashed var(--accent); border-radius: 12px; padding: 14px 14px 2px;
+    margin-bottom: 14px; background: #f0f7ff; }
+  .group-card h3 { margin: 0 0 10px; font-size: 1rem; color: var(--accent-d); }
+  button { font: inherit; font-weight: 700; padding: 13px 22px; border: 0; border-radius: 12px;
+    background: var(--accent); color: #fff; cursor: pointer; width: 100%; }
+  button:hover { background: var(--accent-d); }
+  button:disabled { opacity: .6; cursor: wait; }
+  .credit { text-align: center; margin-top: 28px; color: var(--muted); font-size: .85rem; letter-spacing: .08em; }
+  .credit b { color: var(--accent-d); }
+  .status { margin-top: 14px; padding: 12px 14px; border-radius: 10px; display: none; font-weight: 600; }
+  .status.ok { display: block; background: rgba(27,138,75,.12); color: var(--ok); }
+  .status.bad { display: block; background: rgba(211,47,47,.12); color: var(--err); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>EDU.KZ сайтын ашу</h1>
+  <p class="lead">Мәліметтерді толық әрі дұрыс толтыруыңызды сұраймыз. <span class="req">*</span> — міндетті сұрақ.</p>
+
+  <form id="f" novalidate>
+
+    <fieldset>
+      <legend>1. Ұйым туралы мәліметтер</legend>
+
+      <div class="field">
+        <label class="t">Ұйымның түрі <span class="req">*</span></label>
+        <div class="radios" id="orgType">
+          <label><input type="radio" name="orgType" value="Жекеменшік"> Жекеменшік</label>
+          <label><input type="radio" name="orgType" value="Мемлекеттік"> Мемлекеттік</label>
+        </div>
+        <div class="msg" data-for="orgType"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="orgName">Ұйымның атауы (толық атауын жазу керек) <span class="req">*</span></label>
+        <input type="text" id="orgName" required>
+        <div class="msg" data-for="orgName"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="legalAddress">Ұйымның заңды мекенжайы, оның ішінде қала/аудан <span class="req">*</span></label>
+        <input type="text" id="legalAddress" required>
+        <div class="msg" data-for="legalAddress"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="postIndex">Пошта индексі (6 сан) <span class="req">*</span></label>
+        <input type="text" id="postIndex" inputmode="numeric" maxlength="6" data-pattern="^[0-9]{6}$" data-err="6 сан енгізіңіз" required>
+        <div class="msg" data-for="postIndex"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="orgPhone">Ұйымның телефоны <span class="req">*</span></label>
+        <input type="text" id="orgPhone" inputmode="tel" placeholder="+7 7XX XXX XX XX" required>
+        <div class="msg" data-for="orgPhone"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="orgEmail">Ұйымның E-mail адресі <span class="req">*</span></label>
+        <input type="email" id="orgEmail" data-pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" data-err="Дұрыс E-mail енгізіңіз" required>
+        <div class="msg" data-for="orgEmail"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="bin">Ұйымның БИН-і (12 сан) <span class="req">*</span></label>
+        <input type="text" id="bin" inputmode="numeric" maxlength="12" data-pattern="^[0-9]{12}$" data-err="12 сан енгізіңіз" required>
+        <div class="msg" data-for="bin"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="iik">ИИК KZ (20 таңбалы сан) <span class="req">*</span></label>
+        <input type="text" id="iik" maxlength="20" placeholder="KZ..." data-pattern="^KZ[0-9A-Za-z]{18}$" data-err="KZ-пен басталатын 20 таңба енгізіңіз" required>
+        <div class="msg" data-for="iik"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="bankName">Банк атауы <span class="req">*</span></label>
+        <input type="text" id="bankName" required>
+        <div class="msg" data-for="bankName"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="bik">БИК (8 латын әріптері мен сандары) <span class="req">*</span></label>
+        <input type="text" id="bik" maxlength="8" data-pattern="^[A-Za-z0-9]{8}$" data-err="8 латын әрпі немесе саны енгізіңіз" required>
+        <div class="msg" data-for="bik"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="director">Ұйым басшысының аты – жөні <span class="req">*</span></label>
+        <input type="text" id="director" required>
+        <div class="msg" data-for="director"></div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>2. Сайтқа қажетті ақпарат</legend>
+
+      <div class="field">
+        <label class="t" for="openYear">Ашылған жылы <span class="req">*</span></label>
+        <input type="text" id="openYear" inputmode="numeric" maxlength="4" placeholder="2015" data-pattern="^[0-9]{4}$" data-err="4 таңбалы жыл енгізіңіз" required>
+        <div class="msg" data-for="openYear"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="seats">Орын саны <span class="req">*</span></label>
+        <input type="number" id="seats" min="1" required>
+        <div class="msg" data-for="seats"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="workTime">Жұмыс уақыты <span class="req">*</span></label>
+        <input type="text" id="workTime" placeholder="Дс–Жм, 07:30–19:00" required>
+        <div class="msg" data-for="workTime"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="siteAddress">Мекенжайы <span class="req">*</span></label>
+        <input type="text" id="siteAddress" required>
+        <div class="msg" data-for="siteAddress"></div>
+      </div>
+
+      <div class="field">
+        <label class="t" for="contactPhone">Байланыс номері <span class="req">*</span></label>
+        <input type="text" id="contactPhone" inputmode="tel" required>
+        <div class="msg" data-for="contactPhone"></div>
+      </div>
+
+      <div class="field">
+        <label class="t">Әлеуметтік желі сілтемелері</label>
+        <div class="hint" style="margin-bottom:10px">Бар желілерге ғана сілтеме жазыңыз, қалғандарын бос қалдырыңыз.</div>
+      </div>
+        <div class="field soc-row">
+          <div class="soc-line"><span class="soc-ico" title="Instagram"><svg viewBox="0 0 32 32"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#feda75"/><stop offset=".35" stop-color="#fa7e1e"/><stop offset=".6" stop-color="#d62976"/><stop offset="1" stop-color="#4f5bd5"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#ig)"/><rect x="8" y="8" width="16" height="16" rx="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="16" cy="16" r="3.8" fill="none" stroke="#fff" stroke-width="2"/><circle cx="21" cy="11" r="1.2" fill="#fff"/></svg></span><input type="text" class="soc-input" data-name="Instagram" placeholder="Instagram сілтемесі" aria-label="Instagram" data-pattern="^(https?://\S+|www\.\S+|@\S+|\S+\.\S+)$" data-err="Дұрыс сілтеме немесе @аккаунт енгізіңіз"></div>
+          <div class="msg"></div>
+        </div>
+        <div class="field soc-row">
+          <div class="soc-line"><span class="soc-ico" title="Facebook"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#1877f2"/><path d="M17.5 26v-8h2.7l.5-3.2h-3.2v-2c0-.9.4-1.7 1.8-1.7h1.5V8.4c-.3 0-1.3-.2-2.4-.2-2.5 0-4.1 1.5-4.1 4.2v2.4H11.6V18h2.7v8z" fill="#fff"/></svg></span><input type="text" class="soc-input" data-name="Facebook" placeholder="Facebook сілтемесі" aria-label="Facebook" data-pattern="^(https?://\S+|www\.\S+|@\S+|\S+\.\S+)$" data-err="Дұрыс сілтеме немесе @аккаунт енгізіңіз"></div>
+          <div class="msg"></div>
+        </div>
+        <div class="field soc-row">
+          <div class="soc-line"><span class="soc-ico" title="TikTok"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#111"/><path d="M17.5 8v11.2a3.3 3.3 0 1 1-3.3-3.3" fill="none" stroke="#25f4ee" stroke-width="2.6" stroke-linecap="round" transform="translate(-1 .6)"/><path d="M17.5 8c.3 2.6 1.9 4.2 4.5 4.4" fill="none" stroke="#25f4ee" stroke-width="2.6" stroke-linecap="round" transform="translate(-1 .6)"/><path d="M17.5 8v11.2a3.3 3.3 0 1 1-3.3-3.3" fill="none" stroke="#fe2c55" stroke-width="2.6" stroke-linecap="round" transform="translate(1 -.6)"/><path d="M17.5 8c.3 2.6 1.9 4.2 4.5 4.4" fill="none" stroke="#fe2c55" stroke-width="2.6" stroke-linecap="round" transform="translate(1 -.6)"/><path d="M17.5 8v11.2a3.3 3.3 0 1 1-3.3-3.3" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M17.5 8c.3 2.6 1.9 4.2 4.5 4.4" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg></span><input type="text" class="soc-input" data-name="TikTok" placeholder="TikTok сілтемесі" aria-label="TikTok" data-pattern="^(https?://\S+|www\.\S+|@\S+|\S+\.\S+)$" data-err="Дұрыс сілтеме немесе @аккаунт енгізіңіз"></div>
+          <div class="msg"></div>
+        </div>
+        <div class="field soc-row">
+          <div class="soc-line"><span class="soc-ico" title="YouTube"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#ff0000"/><rect x="6" y="10" width="20" height="12" rx="4" fill="#fff"/><path d="M14 13.2v5.6l5-2.8z" fill="#ff0000"/></svg></span><input type="text" class="soc-input" data-name="YouTube" placeholder="YouTube сілтемесі" aria-label="YouTube" data-pattern="^(https?://\S+|www\.\S+|@\S+|\S+\.\S+)$" data-err="Дұрыс сілтеме немесе @аккаунт енгізіңіз"></div>
+          <div class="msg"></div>
+        </div>
+        <div class="field soc-row">
+          <div class="soc-line"><span class="soc-ico" title="Telegram"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#229ed9"/><path d="M7 15.6l16.5-6.4c.8-.3 1.5.2 1.2 1.4l-2.8 13.2c-.2 1-.8 1.2-1.6.8l-4.3-3.2-2.1 2c-.2.2-.4.4-.9.4l.3-4.4 8-7.2c.3-.3-.1-.5-.5-.2l-9.9 6.2-4.2-1.3c-.9-.3-.9-.9.2-1.3z" fill="#fff"/></svg></span><input type="text" class="soc-input" data-name="Telegram" placeholder="Telegram сілтемесі" aria-label="Telegram" data-pattern="^(https?://\S+|www\.\S+|@\S+|\S+\.\S+)$" data-err="Дұрыс сілтеме немесе @аккаунт енгізіңіз"></div>
+          <div class="msg"></div>
+        </div>
+        <div class="field soc-row">
+          <div class="soc-line"><span class="soc-ico" title="WhatsApp"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#25d366"/><path d="M16 7.5a8.5 8.5 0 0 0-7.3 12.8L7.5 24.5l4.3-1.1A8.5 8.5 0 1 0 16 7.5z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M13 12.2c.3-.5.7-.4 1-.1l.8 1.4c.1.3 0 .5-.2.8l-.5.6c.6 1.2 1.6 2.100 2.800 2.600l.6-.7c.2-.3.5-.3.8-.2l1.400.8c.3.2.3.600.1 1-.6 1.100-1.800 1.300-3 .8-2.100-.8-3.800-2.500-4.600-4.600-.3-.8-.2-1.500.5-2.400z" fill="#fff"/></svg></span><input type="text" class="soc-input" data-name="WhatsApp" placeholder="WhatsApp сілтемесі" aria-label="WhatsApp" data-pattern="^(https?://\S+|www\.\S+|@\S+|\S+\.\S+)$" data-err="Дұрыс сілтеме немесе @аккаунт енгізіңіз"></div>
+          <div class="msg"></div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>3. Топтар туралы</legend>
+
+      <div class="field">
+        <label class="t" for="groupCount">Топ саны <span class="req">*</span></label>
+        <input type="number" id="groupCount" min="1" max="50" placeholder="Мысалы: 4" required>
+        <div class="hint">Санды енгізгенде, әр топқа жеке бөлім пайда болады.</div>
+        <div class="msg" data-for="groupCount"></div>
+      </div>
+
+      <div id="groups"></div>
+    </fieldset>
+
+    <button type="submit" id="send">Жіберу</button>
+    <div class="status" id="status"></div>
+  </form>
+  <div class="credit">CREATED BY <b>Daulet</b></div>
+</div>
+
+<script>
+  // === 1) Осы жерге Apps Script "Web app URL" сілтемесін қойыңыз ===
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzIANjfbWxe13oT6zKOfeBfU-AL2slyexfsYTORrw2AmzmNvxkh6HOvYmJGdYNn4Da1Rg/exec';
+
+  var GROUP_TYPES = ['Кіші', 'Ортаңғы', 'Ересек', 'Мектепалды', 'Басқа'];
+  var MAX_GROUPS = 50;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var groupsBox = $('groups');
+
+  // ---------- Топ карточкалары ----------
+  function groupCardHtml(i) {
+    var opts = '<option value="">— таңдаңыз —</option>' +
+      GROUP_TYPES.map(function (t) { return '<option>' + t + '</option>'; }).join('');
+    return '<div class="group-card" data-i="' + i + '">' +
+      '<h3>Топ ' + i + '</h3>' +
+      '<div class="field"><label class="t">Топ атауы <span class="req">*</span></label>' +
+        '<input type="text" class="g-name">' +
+        '<div class="msg"></div></div>' +
+      '<div class="field"><label class="t">Қандай топ (мектепалды, ортаңғы...) <span class="req">*</span></label>' +
+        '<select class="g-type">' + opts + '</select>' +
+        '<div class="msg"></div></div>' +
+      '<div class="field"><label class="t">Топ жастары <span class="req">*</span></label>' +
+        '<input type="text" class="g-ages" placeholder="Мысалы: 4-5 жас">' +
+        '<div class="msg"></div></div>' +
+    '</div>';
+  }
+
+  $('groupCount').addEventListener('input', function () {
+    var n = parseInt(this.value, 10);
+    if (isNaN(n) || n < 1) n = 0;
+    if (n > MAX_GROUPS) { n = MAX_GROUPS; this.value = n; }
+    var cur = groupsBox.children.length;
+    // Бар топтардың мәліметтері өшпейді: тек қосады не артығын алады
+    while (cur < n) { groupsBox.insertAdjacentHTML('beforeend', groupCardHtml(cur + 1)); cur++; }
+    while (cur > n) { groupsBox.removeChild(groupsBox.lastElementChild); cur--; }
+  });
+
+  // ---------- Тексеру ----------
+  function setErr(el, text) {
+    var msg = el.closest('.field').querySelector('.msg');
+    msg.textContent = text || '';
+    if (el.classList) el.classList.toggle('invalid', !!text);
+  }
+
+  function checkField(el) {
+    var v = (el.value || '').trim();
+    if (el.hasAttribute('required') && !v) { setErr(el, 'Бұл өріс міндетті'); return false; }
+    var p = el.getAttribute('data-pattern');
+    if (v && p && !new RegExp(p).test(v)) { setErr(el, el.getAttribute('data-err')); return false; }
+    setErr(el, ''); return true;
+  }
+
+  function validate() {
+    var ok = true, firstBad = null;
+    function bad(el) { ok = false; if (!firstBad) firstBad = el; }
+
+    // Ұйым түрі
+    var typeSel = document.querySelector('input[name=orgType]:checked');
+    var typeMsg = document.querySelector('[data-for=orgType]');
+    typeMsg.textContent = typeSel ? '' : 'Біреуін таңдаңыз';
+    if (!typeSel) bad($('orgType'));
+
+    // Қалған негізгі өрістер
+    document.querySelectorAll('#f input[required]').forEach(function (el) {
+      if (el.id === 'groupCount') return;
+      if (!checkField(el)) bad(el);
+    });
+
+    // Әлеуметтік желілер (міндетті емес, бірақ толтырылса тексеріледі)
+    document.querySelectorAll('.soc-input').forEach(function (el) {
+      if (!checkField(el)) bad(el);
+    });
+
+    // Топ саны
+    var gc = $('groupCount'), n = parseInt(gc.value, 10);
+    if (isNaN(n) || n < 1) { setErr(gc, 'Топ санын енгізіңіз (1-ден бастап)'); bad(gc); }
+    else setErr(gc, '');
+
+    // Әр топ
+    document.querySelectorAll('.group-card').forEach(function (card) {
+      [['.g-name'], ['.g-type'], ['.g-ages']].forEach(function (s) {
+        var el = card.querySelector(s[0]);
+        var empty = !el.value.trim();
+        setErr(el, empty ? 'Бұл өріс міндетті' : '');
+        if (empty) bad(el);
+      });
+    });
+
+    if (firstBad && firstBad.scrollIntoView) firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return ok;
+  }
+
+  // ---------- Жіберу ----------
+  function collectSocial() {
+    var out = [];
+    document.querySelectorAll('.soc-input').forEach(function (el) {
+      var val = el.value.trim();
+      if (val) out.push(el.getAttribute('data-name') + ': ' + val);
+    });
+    return out.join('\n');
+  }
+
+  function collect() {
+    var g = [];
+    document.querySelectorAll('.group-card').forEach(function (c) {
+      g.push({
+        name: c.querySelector('.g-name').value.trim(),
+        type: c.querySelector('.g-type').value,
+        ages: c.querySelector('.g-ages').value.trim()
+      });
+    });
+    var v = function (id) { return $(id).value.trim(); };
+    return {
+      orgType: document.querySelector('input[name=orgType]:checked').value,
+      orgName: v('orgName'), legalAddress: v('legalAddress'), postIndex: v('postIndex'),
+      orgPhone: v('orgPhone'), orgEmail: v('orgEmail'), bin: v('bin'),
+      iik: v('iik').toUpperCase(), bankName: v('bankName'), bik: v('bik').toUpperCase(),
+      director: v('director'), openYear: v('openYear'), seats: v('seats'),
+      workTime: v('workTime'), siteAddress: v('siteAddress'), contactPhone: v('contactPhone'),
+      social: collectSocial(), groups: g
+    };
+  }
+
+  function showStatus(cls, text) {
+    var s = $('status'); s.className = 'status ' + cls; s.textContent = text;
+  }
+
+  $('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    $('status').className = 'status';
+    if (!validate()) { showStatus('bad', 'Қызыл белгіленген өрістерді толтырыңыз.'); return; }
+    if (SCRIPT_URL.indexOf('PASTE_') === 0) {
+      showStatus('bad', 'SCRIPT_URL орнатылмаған. index.html ішіне Apps Script сілтемесін қойыңыз.'); return;
+    }
+    var btn = $('send'); btn.disabled = true; btn.textContent = 'Жіберілуде...';
+
+    // text/plain + no-cors: Apps Script-ке браузер шектеусіз жібереді
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(collect())
+    }).then(function () {
+      showStatus('ok', 'Рахмет! Мәліметтер сәтті жіберілді.');
+      $('f').reset(); groupsBox.innerHTML = '';
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }).catch(function () {
+      showStatus('bad', 'Жіберу кезінде қате шықты. Интернетті тексеріп, қайталап көріңіз.');
+    }).finally(function () {
+      btn.disabled = false; btn.textContent = 'Жіберу';
+    });
+  });
+
+  document.querySelectorAll('.soc-input').forEach(function (el) {
+    el.addEventListener('blur', function () { checkField(el); });
+  });
+
+  // Өрістерден шыққанда бірден тексеру
+  document.querySelectorAll('#f input[required]').forEach(function (el) {
+    el.addEventListener('blur', function () { if (el.id !== 'groupCount') checkField(el); });
+  });
+</script>
+</body>
+</html>
