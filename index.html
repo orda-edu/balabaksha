@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="kk">
 <head>
 <meta charset="UTF-8">
@@ -11,41 +11,52 @@
     --line: #d6e2f5; --accent: #2f8cff; --accent-d: #1f74e0; --err: #d32f2f; --ok: #1b8a4b;
     --field: #fbfdff;
   }
+  html { font-size: 19px; }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--text);
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 24px 16px 64px; }
-  h1 { font-size: 1.7rem; margin: 8px 0 4px; color: var(--accent-d); }
-  .lead { color: var(--muted); margin: 0 0 20px; }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 2.1rem; line-height: 1.2; margin: 8px 0 4px; color: var(--accent-d); }
+  .lead { color: var(--muted); margin: 0 0 22px; font-size: 1.05rem; }
   fieldset { box-shadow: 0 2px 10px rgba(47,140,255,.08); background: var(--card); border: 1px solid var(--line); border-radius: 14px;
     padding: 18px 18px 6px; margin: 0 0 18px; }
-  legend { font-weight: 700; font-size: 1.05rem; padding: 0 8px; }
+  legend { font-weight: 700; font-size: 1.35rem; padding: 0 8px; }
   .field { margin-bottom: 14px; }
-  label.t { display: block; font-weight: 600; margin-bottom: 5px; }
+  label.t { display: block; font-weight: 600; font-size: 1.05rem; margin-bottom: 7px; }
   .req { color: var(--err); }
-  .hint { color: var(--muted); font-size: .85rem; margin-top: 3px; }
+  .hint { color: var(--muted); font-size: 1rem; margin-top: 3px; }
   input[type=text], input[type=email], input[type=number], textarea, select {
-    width: 100%; padding: 10px 12px; font: inherit; color: var(--text);
+    width: 100%; padding: 13px 14px; font: inherit; font-size: 1.05rem; color: var(--text);
     background: var(--field); border: 1px solid var(--line); border-radius: 10px; }
   input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); border-color: transparent; }
   .invalid { border-color: var(--err) !important; }
-  .msg { color: var(--err); font-size: .85rem; margin-top: 3px; min-height: 0; }
-  .radios { display: flex; gap: 18px; flex-wrap: wrap; }
-  .radios label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .msg { color: var(--err); font-size: 1rem; margin-top: 3px; min-height: 0; }
+  .radios { font-size: 1.1rem; display: flex; gap: 24px; flex-wrap: wrap; }
+  .radios label { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .radios input { width: 22px; height: 22px; }
   .soc-line { display: flex; align-items: center; gap: 10px; }
-  .soc-ico { flex: 0 0 38px; width: 38px; height: 38px; display: inline-flex; }
+  .soc-ico { flex: 0 0 46px; width: 46px; height: 46px; display: inline-flex; }
   .soc-ico svg { width: 100%; height: 100%; }
   .soc-row { margin-bottom: 10px; }
+  .days { display: flex; gap: 8px; flex-wrap: wrap; }
+  .days label { cursor: pointer; }
+  .days input { position: absolute; opacity: 0; pointer-events: none; }
+  .days span { display: inline-block; min-width: 56px; font-size: 1.05rem; text-align: center; padding: 11px 12px;
+    border: 1px solid var(--line); border-radius: 10px; background: var(--field); font-weight: 600; }
+  .days input:checked + span { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .days input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .timeline { display: flex; align-items: center; gap: 10px; }
+  .timeline input { flex: 1; }
   .group-card { border: 1px dashed var(--accent); border-radius: 12px; padding: 14px 14px 2px;
     margin-bottom: 14px; background: #f0f7ff; }
-  .group-card h3 { margin: 0 0 10px; font-size: 1rem; color: var(--accent-d); }
-  button { font: inherit; font-weight: 700; padding: 13px 22px; border: 0; border-radius: 12px;
+  .group-card h3 { margin: 0 0 12px; font-size: 1.25rem; color: var(--accent-d); }
+  button { font: inherit; font-size: 1.15rem; font-weight: 700; padding: 16px 22px; border: 0; border-radius: 12px;
     background: var(--accent); color: #fff; cursor: pointer; width: 100%; }
   button:hover { background: var(--accent-d); }
   button:disabled { opacity: .6; cursor: wait; }
-  .credit { text-align: center; margin-top: 28px; color: var(--muted); font-size: .85rem; letter-spacing: .08em; }
+  .credit { text-align: center; margin-top: 28px; color: var(--muted); font-size: 1rem; letter-spacing: .08em; }
   .credit b { color: var(--accent-d); }
-  .status { margin-top: 14px; padding: 12px 14px; border-radius: 10px; display: none; font-weight: 600; }
+  .status { font-size: 1.05rem; margin-top: 14px; padding: 14px 16px; border-radius: 10px; display: none; font-weight: 600; }
   .status.ok { display: block; background: rgba(27,138,75,.12); color: var(--ok); }
   .status.bad { display: block; background: rgba(211,47,47,.12); color: var(--err); }
 </style>
@@ -146,8 +157,28 @@
       </div>
 
       <div class="field">
-        <label class="t" for="workTime">Жұмыс уақыты <span class="req">*</span></label>
-        <input type="text" id="workTime" placeholder="Дс–Жм, 07:30–19:00" required>
+        <label class="t">Жұмыс күндері <span class="req">*</span></label>
+        <div class="days" id="workDays">
+          <label><input type="checkbox" value="Дс"><span>Дс</span></label>
+          <label><input type="checkbox" value="Сс"><span>Сс</span></label>
+          <label><input type="checkbox" value="Ср"><span>Ср</span></label>
+          <label><input type="checkbox" value="Бс"><span>Бс</span></label>
+          <label><input type="checkbox" value="Жм"><span>Жм</span></label>
+          <label><input type="checkbox" value="Сб"><span>Сб</span></label>
+          <label><input type="checkbox" value="Жс"><span>Жс</span></label>
+        </div>
+        <div class="hint">Жұмыс істейтін күндерді басып белгілеңіз.</div>
+        <div class="msg" data-for="workDays"></div>
+      </div>
+
+      <div class="field">
+        <label class="t">Жұмыс уақыты <span class="req">*</span></label>
+        <div class="timeline">
+          <input type="time" id="workFrom" required aria-label="Басталуы">
+          <span>–</span>
+          <input type="time" id="workTo" required aria-label="Аяқталуы">
+        </div>
+        <div class="hint">Бастау және аяқтау уақыты.</div>
         <div class="msg" data-for="workTime"></div>
       </div>
 
@@ -281,6 +312,17 @@
       if (!checkField(el)) bad(el);
     });
 
+    // Жұмыс күндері
+    var dmsg = document.querySelector('[data-for=workDays]');
+    dmsg.textContent = selectedDays().length ? '' : 'Кемінде бір күнді белгілеңіз';
+    if (!selectedDays().length) bad($('workDays'));
+
+    // Жұмыс уақыты: аяқталуы басталуынан кейін болуы керек
+    var wf = $('workFrom'), wt = $('workTo');
+    if (wf.value && wt.value && wt.value <= wf.value) {
+      setErr(wt, 'Аяқталу уақыты басталудан кейін болуы керек'); bad(wt);
+    }
+
     // Әлеуметтік желілер (міндетті емес, бірақ толтырылса тексеріледі)
     document.querySelectorAll('.soc-input').forEach(function (el) {
       if (!checkField(el)) bad(el);
@@ -315,6 +357,31 @@
     return out.join('\n');
   }
 
+  var DAY_ORDER = ['Дс', 'Сс', 'Ср', 'Бс', 'Жм', 'Сб', 'Жс'];
+
+  function selectedDays() {
+    return Array.prototype.map.call(
+      document.querySelectorAll('#workDays input:checked'), function (c) { return c.value; });
+  }
+
+  // Қатар келген күндерді қысқартады: Дс–Жм, Сб
+  function daysText() {
+    var idx = selectedDays().map(function (d) { return DAY_ORDER.indexOf(d); }).sort(function (a, b) { return a - b; });
+    var parts = [], i = 0;
+    while (i < idx.length) {
+      var j = i;
+      while (j + 1 < idx.length && idx[j + 1] === idx[j] + 1) j++;
+      parts.push(j - i >= 2 ? DAY_ORDER[idx[i]] + '–' + DAY_ORDER[idx[j]]
+        : idx.slice(i, j + 1).map(function (k) { return DAY_ORDER[k]; }).join(', '));
+      i = j + 1;
+    }
+    return parts.join(', ');
+  }
+
+  function workText() {
+    return daysText() + ', ' + $('workFrom').value + '–' + $('workTo').value;
+  }
+
   function collect() {
     var g = [];
     document.querySelectorAll('.group-card').forEach(function (c) {
@@ -331,7 +398,7 @@
       orgPhone: v('orgPhone'), orgEmail: v('orgEmail'), bin: v('bin'),
       iik: v('iik').toUpperCase(), bankName: v('bankName'), bik: v('bik').toUpperCase(),
       director: v('director'), openYear: v('openYear'), seats: v('seats'),
-      workTime: v('workTime'), siteAddress: v('siteAddress'), contactPhone: v('contactPhone'),
+      workTime: workText(), siteAddress: v('siteAddress'), contactPhone: v('contactPhone'),
       social: collectSocial(), groups: g
     };
   }
